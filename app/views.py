@@ -101,12 +101,19 @@ def view_profiles():
         all_profiles=Profile.query.all()
         return render_template("profiles.html",all_profiles=all_profiles);
 
-@app.route("/profile/<userid>",methods=["GET"])############GET 1
+@app.route("/profile/<userid>",methods=["GET","POST"])############GET 1
 def view1_profile(userid):
     #uid=request.GET.get('<userid>','')
-    
-    prof=Profile.query.filter_by(id=userid)
-    return render_template("profile.html",prof=prof)
+    if(request.method=="POST"):
+        profile1=list((Profile.query.filter_by(id=userid))
+                      .with_entities(Profile.username,Profile.id,Profile.gender,Profile.age))
+        jres= json.dumps(profile1)
+        res=Response(response=jres,status=200,mimetype="application/json")
+        
+        return res
+    else:
+        prof=Profile.query.filter_by(id=userid)
+        return render_template("profile.html",prof=prof)
 
 # user_loader callback. This callback is used to reload the user object from
 # the user ID stored in the session
