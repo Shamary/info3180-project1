@@ -6,10 +6,10 @@ This file creates your application.
 """
 
 from app import app, db, login_manager
-from flask import render_template, request, redirect, url_for, flash, json, jsonify, Response
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user, login_required
-from forms import LoginForm,UpForm
-from models import UserProfile,Profile
+from forms import LoginForm
+from models import UserProfile
 
 
 ###
@@ -68,45 +68,18 @@ def logout():
 
 #################project###################
 
-@app.route("/profile",methods=["GET","POST"])################ADD
+@app.route("/profile",method=["GET"])################ADD
 def add_profile():
-    form=UpForm()
-    if(form.validate_on_submit()):
-        flash("Is valid")
-        fname=form.fname.data
-        lname=form.lname.data
-        uname=form.uname.data;
-        uage=form.age.data
-        gen=form.gender.data
-        bio=form.biography.data
-        
-        profile=Profile(first_name=fname,last_name=lname,username=uname,age=uage,gender=gen,biography=bio)
-        
-        db.session.add(profile)
-        db.session.commit()
-        
-        return redirect(url_for('home'))
-            
-    return render_template("add_profile.html",form=form);
+    i
+    return render_template("add_profile.html");
 
-@app.route("/profiles",methods=["GET","POST"])##############GET +
+@app.route("/profiles",method=["GET"])##############GET +
 def view_profiles():
-    if(request.method=="POST"):
-        all_profiles=list(Profile.query.with_entities(Profile.username,Profile.id))
-        jres= json.dumps(all_profiles)
-        res=Response(response=jres,status=200,mimetype="application/json")
-        
-        return res
-    else:
-        all_profiles=Profile.query.all()
-        return render_template("profiles.html",all_profiles=all_profiles);
+    return render_template("profiles.html");
 
-@app.route("/profile/<userid>",methods=["GET"])############GET 1
-def view1_profile(userid):
-    #uid=request.GET.get('<userid>','')
-    
-    prof=Profile.query.filter_by(id=userid)
-    return render_template("profile.html",prof=prof)
+@app.route("/profiles/<userid>",method=["GET"])############GET 1
+def view1_profile():
+    return render_template("profile.html",request.GET.get('<userid>',''));
 
 # user_loader callback. This callback is used to reload the user object from
 # the user ID stored in the session

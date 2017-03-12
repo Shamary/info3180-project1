@@ -13,9 +13,11 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
             <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('add_profile') }}">Add Profile</a></li>
+            <li><a href="{{ url_for('view_profiles') }}">Profiles</a></li>
           </ul>
 
-          <ul class="nav navbar-nav navbar-right">
+          <!--<ul class="nav navbar-nav navbar-right">
             {% if current_user.is_authenticated %}
               <li class="active"><a href="{{ url_for('logout') }}">Logout</a></li>
             {% else %}

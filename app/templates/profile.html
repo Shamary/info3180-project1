@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="lst_prof">
+    {% for profile in prof %}
+    <h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
+    <label>Username: {{profile.username}}</label>
+    <label>User ID: {{profile.id}}</label>
+    <label>gender: {{profile.gender}}</label>
+    <label>age: {{profile.age}}</label>
+    
+    <p>{{profile.biography}}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
