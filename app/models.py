@@ -32,7 +32,10 @@ class Profile(db.Model):
     username= db.Column(db.String(30))
     age=db.Column(db.String(3))
     gender=db.Column(db.String(6))
+    photo=db.Column(db.String(1024))
     biography=db.Column(db.String(80))
+    date=db.Column(db.Date)
+    
     
     #image=db.Column(db.bytea)
     

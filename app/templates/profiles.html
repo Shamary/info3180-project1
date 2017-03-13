@@ -1,15 +1,24 @@
 {% extends "base.html" %}
 
 {% block main %}
+    
     {% for profile in all_profiles %}
+    <div class="pcontainer">
+        <div class="img_div">
+            <img src="{{url_for('static',filename='pics/'+profile.photo)}}"></img>
+        </div>
         <div class="lst_prof">
             <h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
-            <label>Username: {{profile.username}}</label>
-            <label>User ID: {{profile.id}}</label>
-            <label>gender: {{profile.gender}}</label>
-            <label>age: {{profile.age}}</label>
-            
+            <label><strong>Profile Created On:</strong> {{profile.date}}</label>
+            <br>
+            <label><strong>Username:</strong> {{profile.username}}</label>
+            <label><strong>User ID:</strong> {{profile.id}}</label>
+            <label><strong>gender:</strong> {{profile.gender}}</label>
+            <label><strong>age:</strong> {{profile.age}}</label>
+            <br>
             <p>{{profile.biography}}</p>
         </div>
+    </div>
     {% endfor %}
+    
 {% endblock %}}
